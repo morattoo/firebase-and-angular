@@ -6,11 +6,11 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyAd24FroBUtxLb0GNk_GloGW94nudkXId0",
-    authDomain: "crossfit-2e9b2.firebaseapp.com",
-    databaseURL: "https://crossfit-2e9b2.firebaseio.com",
-    projectId: "crossfit-2e9b2",
-    storageBucket: "",
-    messagingSenderId: "836755309726"
+    apiKey: "AIzaSyChqbt-shuVdQiOlsxP5r-ysx5idM5NNEA",
+    authDomain: "mastercrossfit-59a80.firebaseapp.com",
+    databaseURL: "https://mastercrossfit-59a80.firebaseio.com",
+    projectId: "mastercrossfit-59a80",
+    storageBucket: "mastercrossfit-59a80.appspot.com",
+    messagingSenderId: "971377600308"
   }
 };

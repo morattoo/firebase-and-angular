@@ -4,20 +4,26 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
+import { ExercisesComponent } from './components/exercises/exercises.component';
+import { SeriesComponent } from './components/series/series.component';
+
+import { SeriesService } from './services/series.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ExercisesComponent,
+    SeriesComponent
   ],
   imports: [
     BrowserModule,
-    AngularFireDatabaseModule,
+    AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
-  providers: [],
+  providers: [SeriesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
