@@ -14,4 +14,15 @@ export class SeriesService {
     return this.seriesList = this.firebase.collection('series').valueChanges();
   }
 
+  getExercisesByID($seriesList: any) {
+    // const exercises = [];
+    // return this.firebase.collection('posts')
+    //             .where('categories.cats', '==', true)
+    //             .get()
+    //             .then(() => {
+    //                 // ...
+    //             });
+
+  }
+
 }
