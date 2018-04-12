@@ -1,8 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SeriesService } from '../../services/series.service';
-import { Serie } from '../../models/serie';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+
+
+interface Workout {
+  description: string,
+  nameDisplay: string,
+  programme: any,
+  type: string,
+  update: Date
+}
 
 @Component({
   selector: 'app-series',
@@ -12,11 +21,22 @@ import { Observable } from 'rxjs/Observable';
 
 export class SeriesComponent implements OnInit {
 
-  seriesList: Observable<any[]>;
+  workoutCol: AngularFirestoreCollection<Workout>;
+  workouts: Observable<Workout[]>;
+  test: any;
 
-  constructor( private seriesService: SeriesService) { }
+  constructor( private afs: AngularFirestore) { }
 
   ngOnInit() {
-    this.seriesList = this.seriesService.getSeries();
+    this.workoutCol = this.afs.collection('workouts');
+    this.workouts = this.workoutCol.valueChanges();
+
+    this.afs.collection('workouts').ref.get().then(function(querySnapshot) {
+
+      querySnapshot.forEach(function(doc) {
+          console.log(doc.id, " => ", doc.data());
+      });
+
+    });
   }
 }

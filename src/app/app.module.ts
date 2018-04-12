@@ -10,8 +10,6 @@ import { environment } from '../environments/environment';
 import { ExercisesComponent } from './components/exercises/exercises.component';
 import { SeriesComponent } from './components/series/series.component';
 
-import { SeriesService } from './services/series.service';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +21,7 @@ import { SeriesService } from './services/series.service';
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
-  providers: [SeriesService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
