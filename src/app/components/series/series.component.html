@@ -1,9 +1,16 @@
-<div class="card" *ngFor=" let workout of allWorkouts | async">
+<div class="card" *ngFor=" let workout of allWorkouts">
   <div class="card-body">
     <div class="item">
       <h2>{{workout.nameDisplay}}</h2>
       <h6>{{workout.type}}</h6>
       <p>{{workout.description}}</p>
+      <div>
+        <ul>
+          <li *ngFor=" let training of workout.programme.training">
+            <span>{{training.exercise.name}}</span>
+          </li>
+        </ul>
+      </div>
       <button type="button" class="btn btn-primary">Run this session</button>
       <p><small>{{workout.updated}}</small></p>
     </div>

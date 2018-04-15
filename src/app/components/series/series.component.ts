@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-
 
 interface Workout {
   description: string,
@@ -23,7 +21,7 @@ export class SeriesComponent implements OnInit {
 
   workoutCol: AngularFirestoreCollection<Workout>;
   workouts: Observable<Workout[]>;
-  allWorkouts: any;
+  public allWorkouts: Observable<Workout>;
 
   constructor( private afs: AngularFirestore) { }
 
@@ -31,30 +29,30 @@ export class SeriesComponent implements OnInit {
     this.workoutCol = this.afs.collection('workouts');
     this.workouts = this.workoutCol.valueChanges();
 
-    this.allWorkouts = this.getAllData(function(allCompleteWorkouts) {
+     this.getAllData((allCompleteWorkouts) => {
       console.log(allCompleteWorkouts);
-      return allCompleteWorkouts;
+      this.allWorkouts = allCompleteWorkouts;
     });    
   }
 
-  getAllData(returnAll) {
-    let allWorkouts = [];
-    let allExercises = {};
+  getAllData(returnWorkout: any) {
+    let workouts = [];
+    let exercise = {};
 
     this.callFireStoreArray('workouts', (response) => {
-      allWorkouts = response;
+      workouts = response;
 
       this.callFireStoreObjects('exercises', (response) => {
-        allExercises = response;
+        exercise = response;
 
-        allWorkouts.forEach(function(workout, index) {
+        workouts.forEach(function(workout, index) {
           
           workout.programme.training.forEach(function(training, index){
-            workout.programme.training[index].description = allExercises[training.item];
+            workout.programme.training[index].exercise = exercise[training.item];
           })
         });
 
-        returnAll(allWorkouts);
+        returnWorkout(workouts);
       });
 
     });
