@@ -19,16 +19,11 @@ interface Workout {
 
 export class SeriesComponent implements OnInit {
 
-  workoutCol: AngularFirestoreCollection<Workout>;
-  workouts: Observable<Workout[]>;
   public allWorkouts: Observable<Workout>;
 
   constructor( private afs: AngularFirestore) { }
 
   ngOnInit() {
-    this.workoutCol = this.afs.collection('workouts');
-    this.workouts = this.workoutCol.valueChanges();
-
      this.getAllData((allCompleteWorkouts) => {
       console.log(allCompleteWorkouts);
       this.allWorkouts = allCompleteWorkouts;
