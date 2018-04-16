@@ -10,6 +10,11 @@ import { environment } from '../environments/environment';
 import { ExercisesComponent } from './components/exercises/exercises.component';
 import { SeriesComponent } from './components/series/series.component';
 
+/* Material */
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule, MatCheckboxModule, MatCardModule } from '@angular/material';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +24,11 @@ import { SeriesComponent } from './components/series/series.component';
   imports: [
     BrowserModule,
     AngularFirestoreModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
