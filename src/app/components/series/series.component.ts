@@ -20,6 +20,7 @@ interface Workout {
 export class SeriesComponent implements OnInit {
 
   public allWorkouts: Observable<Workout>;
+  public slideConfig = {'slidesToShow': 4, 'slidesToScroll': 4};
 
   constructor( private afs: AngularFirestore) { }
 
@@ -78,4 +79,10 @@ export class SeriesComponent implements OnInit {
         success(allData);
     });
   }
+  
+  afterChange($e: any) {
+    console.log('afterChange', $e);
+  }
 }
+
+  

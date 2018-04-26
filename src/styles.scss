@@ -11,3 +11,38 @@ body {
         margin-top: 20px;
     }
 }
+
+.carousel {
+    width: 900px;
+    overflow-x: auto;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.slide {
+    max-width: 200px;
+    position: relative;
+    display: inline-block;
+    + .slide {
+        margin-left: 15px;
+    }
+}
+
+.img_box {
+    width: 200px;
+    height: 200px;
+}
+
+.img_box_item {
+    display: inline-block;
+}
+
+.info {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+}
+
+.title_exercise {
+    color: red;
+}
