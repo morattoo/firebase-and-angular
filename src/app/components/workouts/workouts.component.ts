@@ -12,12 +12,11 @@ interface Workout {
 }
 
 @Component({
-  selector: 'app-series',
-  templateUrl: './series.component.html',
-  styleUrls: ['./series.component.css']
+  selector: 'app-workouts',
+  templateUrl: './workouts.component.html'
 })
 
-export class SeriesComponent implements OnInit {
+export class WorkoutsComponent implements OnInit {
 
   public allWorkouts: Observable<Workout>;
   public slideConfig = {'slidesToShow': 4, 'slidesToScroll': 4};

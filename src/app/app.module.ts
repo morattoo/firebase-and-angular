@@ -8,7 +8,8 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { ExercisesComponent } from './components/exercises/exercises.component';
-import { SeriesComponent } from './components/series/series.component';
+import { WorkoutsComponent } from './components/workouts/workouts.component';
+import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 
 /* Bootstrap */
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -19,12 +20,30 @@ import { DragScrollModule } from 'ngx-drag-scroll';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatCheckboxModule, MatCardModule } from '@angular/material';
 
+import { RouterModule, Routes } from '@angular/router';
+import { WorkoutComponent } from './components/workout/workout.component';
+
+const appRoutes: Routes = [
+  { path: 'workouts', component: WorkoutsComponent },
+  { path: 'workouts/:id',      component: WorkoutComponent },
+  {
+    path: 'exercises',
+    component: ExercisesComponent
+  },
+  { path: '',
+    redirectTo: '/workouts',
+    pathMatch: 'full'
+  },
+  { path: '**', component: PagenotfoundComponent }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     ExercisesComponent,
-    SeriesComponent
+    WorkoutsComponent,
+    WorkoutComponent,
+    PagenotfoundComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +54,10 @@ import { MatButtonModule, MatCheckboxModule, MatCardModule } from '@angular/mate
     MatCheckboxModule,
     MatCardModule,
     DragScrollModule,
-    SlickModule.forRoot()
+    SlickModule.forRoot(),
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true })
   ],
   providers: [],
   bootstrap: [AppComponent]
