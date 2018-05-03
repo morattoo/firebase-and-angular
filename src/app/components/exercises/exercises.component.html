@@ -1,3 +1,10 @@
-<p>
-  exercises works!
-</p>
+
+<div class="row"  *ngFor="let exercise of exercises| async">
+  <div class="col-md-3">
+      <h2>{{exercise.name}}</h2>
+      <p>{{exercise.description}}</p>
+  </div>
+  <div>
+      <img class="img_box"  src="{{exercise.resources.img}}" alt="">
+  </div>
+</div>
