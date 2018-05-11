@@ -1,15 +1,18 @@
- <div class="row" *ngFor=" let workout of allWorkouts">
-    <h1>{{workout.nameDisplay}}</h1>
+ <div class="workout" *ngFor=" let workout of allWorkouts">
+    <div>
+        <h1>{{workout.nameDisplay}}</h1>
+    </div>
     <p>{{workout.type}}</p>
     <p>{{workout.description}}</p>
     <div class="carousel" (afterChange)="afterChange($event)">
-        <div class="slide" *ngFor="let training of workout.programme.training">
-            <img class="img_box" src="{{training.exercise.resources.img}}" alt="Random first slide">
-            <div class="info">
-              <h3 class="title_exercise">{{training.exercise.name}}</h3>
-            </div>
-        </div>
+      <div class="slide" *ngFor="let training of workout.programme.training">
+          <img class="img_box" src="{{training.exercise.resources.img}}" alt="Random first slide">
+          <div class="info">
+            <h3 class="title_exercise">{{training.exercise.name}}</h3>
+          </div>
       </div>
+    </div>
+    <a routerLink="/workouts/{{workout.id}}" routerLinkActive="active" class="btn btn-primary"> Make this workout </a>
  </div>
 
  
