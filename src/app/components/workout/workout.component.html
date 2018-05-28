@@ -1,3 +1,11 @@
-<div>
-    <h1>{{workoutId}}</h1>
+<div class="container-fluid">
+    <carousel>
+        <slide *ngFor="let training of mockWorkout.programme.training">
+            <img src="{{training.exercise.resources.img}}" alt="first slide" style="display: block; width: 100%;">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>{{ training.exercise.name }}</h5>
+                <p>{{ training.exercise.description }}</p>
+            </div>
+        </slide>
+    </carousel>
 </div>

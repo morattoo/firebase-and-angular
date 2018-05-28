@@ -12,13 +12,7 @@ import { WorkoutsComponent } from './components/workouts/workouts.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 
 /* Bootstrap */
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { SlickModule } from 'ngx-slick';
-import { DragScrollModule } from 'ngx-drag-scroll';
-
-/* Material */
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule, MatCardModule } from '@angular/material';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 import { RouterModule, Routes } from '@angular/router';
 import { WorkoutComponent } from './components/workout/workout.component';
@@ -49,12 +43,7 @@ const appRoutes: Routes = [
     BrowserModule,
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase),
-    BrowserAnimationsModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatCardModule,
-    DragScrollModule,
-    SlickModule.forRoot(),
+    CarouselModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true })
