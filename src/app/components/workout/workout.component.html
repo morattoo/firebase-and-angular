@@ -1,6 +1,7 @@
 <div class="playWorkout">
+    <div>{{ (item | async)?.nameDisplay }}</div>
     <carousel class="flex-1" (activeSlideChange)="log($event)" [interval]="false">
-        <slide *ngFor="let training of mockWorkout.programme.training">
+        <slide *ngFor="let training of (item | async)?.programme.training">
             <img class="img_slide" src="{{training.exercise.resources.img}}" alt="first slide">
             <div class="carousel-caption d-none d-md-block">
                 <h5>{{ training.exercise.name }}</h5>
