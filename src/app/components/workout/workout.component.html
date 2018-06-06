@@ -1,5 +1,5 @@
-<div class="container-fluid">
-    <carousel>
+<div class="playWorkout">
+    <carousel class="flex-1" (activeSlideChange)="log($event)" [interval]="false">
         <slide *ngFor="let training of mockWorkout.programme.training">
             <img class="img_slide" src="{{training.exercise.resources.img}}" alt="first slide">
             <div class="carousel-caption d-none d-md-block">
@@ -8,4 +8,7 @@
             </div>
         </slide>
     </carousel>
+    <button type="button" class="btn btn-info"
+          (click)="noPause = !noPause">Toggle pause on hover
+  </button>
 </div>

@@ -6,13 +6,15 @@ import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-workout',
-  templateUrl: './workout.component.html'
+  templateUrl: './workout.component.html',
+  host: {'class': 'workout'}
 })
 
 export class WorkoutComponent implements OnInit {
   
   public workoutId: string;
   public workout: any;
+  public noPause: boolean = true;
 
   public mockWorkout = {
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consequat, velit ac semper gravida, ante nibh rhoncus dui, eget consequat leo neque et tortor. Proin nulla sem, malesuada ut rhoncus eu, aliquet ac ligula. Morbi efficitur id nulla rutrum tristique. Quisque eget lorem sem. Curabitur semper suscipit leo sed semper. Vivamus malesuada tristique metus iaculis varius. Donec dapibus justo nisi, ac rutrum nunc venenatis sed.",
@@ -133,6 +135,10 @@ export class WorkoutComponent implements OnInit {
     }).catch(function(error) {
         console.log("Error getting document:", error);
     }); */
+  }
+
+  log(event: number) {
+     console.log(event);
   }
 
 }
