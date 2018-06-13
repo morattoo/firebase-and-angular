@@ -14,6 +14,7 @@ export class WorkoutComponent implements OnInit {
   public workoutId: string;
   public workout: any;
   public dataTraining: any;
+  public activeSlideIndex = 0;
 
   private itemDoc: AngularFirestoreDocument<any>;
   item: Observable<any>;
@@ -42,5 +43,7 @@ export class WorkoutComponent implements OnInit {
 
   playWorkout() {
     console.log(this.dataTraining);
+    this.activeSlideIndex = 1;
   }
 }
+
