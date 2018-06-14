@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument} from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -9,8 +9,9 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
   host: {'class': 'workout'}
 })
 
-export class WorkoutComponent implements OnInit {
-  
+export class WorkoutComponent implements OnInit, AfterViewInit {
+  @ViewChild('timer') timer;
+
   public workoutId: string;
   public workout: any;
   public dataTraining: any;
@@ -33,6 +34,10 @@ export class WorkoutComponent implements OnInit {
     this.itemDoc.valueChanges().subscribe(item => this.getDataItemTraining(item));
   }
 
+  ngAfterViewInit() {
+    console.log(this.timer);
+  }
+
   log(event: number) {
      console.log(event);
   }
@@ -42,8 +47,36 @@ export class WorkoutComponent implements OnInit {
   }
 
   playWorkout() {
-    console.log(this.dataTraining);
-    this.activeSlideIndex = 1;
+    const itemActive = 0;
+    const trainingActive = this.dataTraining[itemActive];
+    const display = this.timer.nativeElement;
+
+    const timer = new Timer();
+
+    timer.start({
+      countdown: true,
+      startValues: { seconds: trainingActive.duration}, 
+      callback: this.startTimer(timer)
+    });     
+  }
+
+  startTimer($timer) {
+    const display = this.timer.nativeElement;
+
+    display.innerHTML = $timer.getTimeValues().toString(['seconds']);
+
+    $timer.addEventListener('secondsUpdated', function (e) {
+      display.innerHTML = $timer.getTimeValues().toString(['seconds']);
+    });
+
+    $timer.addEventListener('targetAchieved', function (e) {
+      display.innerHTML = 'yes!!';
+      this.nextStep(0);
+    }.bind(this), false);
+  }
+
+  nextStep($currentTraining):void {
+    this.activeSlideIndex = $currentTraining + 1;
   }
 }
 

@@ -1,10 +1,9 @@
 <div class="playWorkout">
     <button class="btn btn-primary" (click)="playWorkout()">Play</button>
+    <span #timer class="duration">0</span>
     <carousel class="flex-1" (activeSlideChange)="log($event)" [interval]="false" [(activeSlide)]="activeSlideIndex">
-        <slide *ngFor="let training of (item | async)?.programme.training">
+        <slide *ngFor="let training of (item | async)?.programme.training; let i = index">
             <img class="img_slide" src="{{training.exercise.resources.img}}" alt="first slide">
-            <span class="duration">{{ training.duration }}</span>
-            <span class="rest">{{ training.rest }}</span>
             <div class="carousel-caption d-none d-md-block">
             <h5>{{ training.exercise.name }} <span>({{training.item}})</span></h5>
                 <p>{{ training.exercise.description }}</p>

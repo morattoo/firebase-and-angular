@@ -32,6 +32,7 @@ header {
 
     .playWorkout {
         flex: 1;
+        position: relative;
     }
 }
 
@@ -92,6 +93,7 @@ header {
 
 .duration {
     position: absolute;
+    z-index: 1;
     top: 10px;
     left: 50px;
     width: auto;
