@@ -15,7 +15,8 @@ export class WorkoutComponent implements OnInit, AfterViewInit {
   public workoutId: string;
   public workout: any;
   public dataTraining: any;
-  public activeSlideIndex = 0;
+  public activeSlideIndex: number = 0;
+  private countDown: any;
 
   private itemDoc: AngularFirestoreDocument<any>;
   item: Observable<any>;
@@ -46,37 +47,51 @@ export class WorkoutComponent implements OnInit, AfterViewInit {
     this.dataTraining = $data.programme.training;
   }
 
-  playWorkout() {
-    const itemActive = 0;
-    const trainingActive = this.dataTraining[itemActive];
-    const display = this.timer.nativeElement;
-
-    const timer = new Timer();
-
-    timer.start({
-      countdown: true,
-      startValues: { seconds: trainingActive.duration}, 
-      callback: this.startTimer(timer)
-    });     
+  pauseWorkout(){
+    this.countDown.pause();
   }
 
-  startTimer($timer) {
+  stopWorkout() {
+    this.countDown.stop();
+  }
+
+  playWorkout() {
+    const trainingActive = this.dataTraining[this.activeSlideIndex];
+    if(trainingActive) {
+      this.countDown = new Timer();
+      this.countDown.start({
+        countdown: true,
+        startValues: { seconds: trainingActive.duration}, 
+        callback: this.startTimer()
+      });  
+    } else {
+      this.trainingComplited();
+    }  
+  }
+
+  startTimer() {
+    
     const display = this.timer.nativeElement;
+    display.innerHTML = this.countDown.getTimeValues().toString(['seconds']);
 
-    display.innerHTML = $timer.getTimeValues().toString(['seconds']);
+    this.countDown.addEventListener('secondsUpdated', function (e) {
+      display.innerHTML = this.countDown.getTimeValues().toString(['seconds']);
+    }.bind(this), false);
 
-    $timer.addEventListener('secondsUpdated', function (e) {
-      display.innerHTML = $timer.getTimeValues().toString(['seconds']);
-    });
-
-    $timer.addEventListener('targetAchieved', function (e) {
+    this.countDown.addEventListener('targetAchieved', function (e) {
       display.innerHTML = 'yes!!';
-      this.nextStep(0);
+      this.nextStep();
     }.bind(this), false);
   }
 
-  nextStep($currentTraining):void {
-    this.activeSlideIndex = $currentTraining + 1;
+  nextStep():void {
+    this.countDown.removeEventListener();
+    this.activeSlideIndex = ++this.activeSlideIndex;
+    this.playWorkout();
+  }
+
+  trainingComplited() {
+    this.timer.nativeElement.innerHTML = "Session Complited";
   }
 }
 

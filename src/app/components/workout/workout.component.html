@@ -1,5 +1,10 @@
 <div class="playWorkout">
-    <button class="btn btn-primary" (click)="playWorkout()">Play</button>
+    <div>
+            <button class="btn btn-primary" (click)="playWorkout()">Play</button>
+            <button class="btn btn-primary" (click)="pauseWorkout()">Pause</button>
+            <button class="btn btn-primary" (click)="stopWorkout()">stop</button>
+    </div>
+    
     <span #timer class="duration">0</span>
     <carousel class="flex-1" (activeSlideChange)="log($event)" [interval]="false" [(activeSlide)]="activeSlideIndex">
         <slide *ngFor="let training of (item | async)?.programme.training; let i = index">
