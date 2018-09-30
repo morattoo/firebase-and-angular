@@ -1,5 +1,5 @@
 
-<div class="row"  *ngFor="let exercise of exercises| async">
+<div class="row"  *ngFor="let exercise of exercises | async; let i = index" [attr.data-index]="i">
   <div class="col-md-3">
       <h2>{{exercise.name}}</h2>
       <p>{{exercise.description}}</p>

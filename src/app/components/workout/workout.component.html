@@ -6,13 +6,13 @@
     </div>
     
     <span #timer class="duration">0</span>
-    <carousel class="flex-1" (activeSlideChange)="log($event)" [interval]="false" [(activeSlide)]="activeSlideIndex">
-        <slide *ngFor="let training of (item | async)?.programme.training; let i = index">
+    <ul class="flex-1">
+        <li *ngFor="let training of (item | async)?.programme.training; let i = index">
             <img class="img_slide" src="{{training.exercise.resources.img}}" alt="first slide">
             <div class="carousel-caption d-none d-md-block">
             <h5>{{ training.exercise.name }} <span>({{training.item}})</span></h5>
                 <p>{{ training.exercise.description }}</p>
             </div>
-        </slide>
-    </carousel>
+        </li>
+    </ul>
 </div>
